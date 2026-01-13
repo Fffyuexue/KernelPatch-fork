@@ -1,18 +1,18 @@
-name: Build DEV CI
+name: Build HanaBreeze CI
 
 on:
   push:
-    branches: ["dev"]
+    branches: ["HanaBreeze"]
     paths:
-      - ".github/workflows/build_dev.yml"
+      - ".github/workflows/build_hanabreeze.yml"
       - "kernel/**"
       - "user/**"
       - "tools/**"
       - "version"
   pull_request:
-    branches: ["dev"]
+    branches: ["HanaBreeze"]
     paths:
-      - ".github/workflows/build_dev.yml"
+      - ".github/workflows/build_hanabreeze.yml"
       - "kernel/**"
       - "user/**"
       - "tools/**"
@@ -88,7 +88,20 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.parse_version.outputs.VERSION }}-dev
+          tag: ${{ steps.parse_version.outputs.VERSION }}-hanabreeze
+          name: HanaBreeze ${{ steps.parse_version.outputs.VERSION }}
+          body: |
+            HanaBreeze 分支预发布版本
+            
+            ## 变更内容
+            - KPM_ARGS_LEN 从 1024 增加到 10000
+            - 支持更长的模块参数传递
+            
+            ## 包含文件
+            - kpimg-android / kpimg-linux: 内核镜像
+            - kpuser.zip: 用户空间库
+            - kptools-android / kptools-linux / kptools-mac: 管理工具
+            - demo-*.kpm: 示例模块
           artifacts: |
             kernel/kpimg-linux
             kernel/kpimg-android
@@ -129,7 +142,10 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.parse_version.outputs.VERSION }}-dev
+          tag: ${{ steps.parse_version.outputs.VERSION }}-hanabreeze
+          name: HanaBreeze ${{ steps.parse_version.outputs.VERSION }}
+          body: |
+            HanaBreeze 分支用户空间库
           artifacts: |
             kpuser.zip
           allowUpdates: true
@@ -186,7 +202,10 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.parse_version.outputs.VERSION }}-dev
+          tag: ${{ steps.parse_version.outputs.VERSION }}-hanabreeze
+          name: HanaBreeze ${{ steps.parse_version.outputs.VERSION }}
+          body: |
+            HanaBreeze 分支 Android 管理工具
           artifacts: |
             tools/build/android/kptools-android
           allowUpdates: true
@@ -229,7 +248,10 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.parse_version.outputs.VERSION }}-dev
+          tag: ${{ steps.parse_version.outputs.VERSION }}-hanabreeze
+          name: HanaBreeze ${{ steps.parse_version.outputs.VERSION }}
+          body: |
+            HanaBreeze 分支 Linux 管理工具
           artifacts: |
             tools/build/kptools-linux
           allowUpdates: true
@@ -271,7 +293,10 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.parse_version.outputs.VERSION }}-dev
+          tag: ${{ steps.parse_version.outputs.VERSION }}-hanabreeze
+          name: HanaBreeze ${{ steps.parse_version.outputs.VERSION }}
+          body: |
+            HanaBreeze 分支 macOS 管理工具
           artifacts: |
             tools/build/kptools-mac
           allowUpdates: true
